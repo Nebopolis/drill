@@ -65,7 +65,7 @@ impl Request {
 
     let mut headers = HashMap::new();
 
-    if let Some(hash) = item["request"]["headers"].as_hash() {
+    if let Some(hash) = item["request"]["headers"][0].as_hash() {
       for (key, val) in hash.iter() {
         if let Some(vs) = val.as_str() {
           headers.insert(key.as_str().unwrap().to_string(), vs.to_string());
