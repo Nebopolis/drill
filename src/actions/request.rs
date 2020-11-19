@@ -66,8 +66,25 @@ impl Request {
     let mut headers = HashMap::new();
 
     if let Some(hash) = item["request"]["headers"][0].as_hash() {
+      println!("HASH {:?}", hash);
       for (key, val) in hash.iter() {
+        println!("KEY {:?}", key);
         if let Some(vs) = val.as_str() {
+          println!("key: {:?} val: {:?}", key, vs);
+
+          headers.insert(key.as_str().unwrap().to_string(), vs.to_string());
+        } else {
+          panic!("{} Headers must be strings!!", "WARNING!".yellow().bold());
+        }
+      }
+    }
+    if let Some(hash) = item["request"]["headers"][1].as_hash() {
+      println!("HASH {:?}", hash);
+      for (key, val) in hash.iter() {
+        println!("KEY {:?}", key);
+        if let Some(vs) = val.as_str() {
+          println!("key: {:?} val: {:?}", key, vs);
+
           headers.insert(key.as_str().unwrap().to_string(), vs.to_string());
         } else {
           panic!("{} Headers must be strings!!", "WARNING!".yellow().bold());
